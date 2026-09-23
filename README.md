@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# Banking Computation Challenges
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive React + TypeScript demo covering six real, common computational challenges that banking and fintech websites run into — each with a working, tabbed example showing both a naive (buggy) approach and the correct fix side by side.
 
-Currently, two official plugins are available:
+**[Live Demo](#)** · **[Screenshot](#)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Why this project
 
-## React Compiler
+I got curious about what computational problems a banking website actually has to deal with behind the scenes — not textbook theory, but the kind of thing that quietly breaks in production. I used AI-assisted research to explore this space, found six challenges worth understanding properly, and implemented each one from scratch to make sure I actually understood them rather than just knowing they exist.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## What's inside
 
-## Expanding the ESLint configuration
+| Tab | What it shows |
+|---|---|
+| **دقت اعشاری (Float precision)** | Why `0.1 + 0.2 !== 0.3` in JavaScript, and an integer-arithmetic + remainder-distribution technique for splitting money without precision loss |
+| **گردکردن اقساط (Loan rounding)** | Why a loan's remaining balance doesn't always hit exactly zero after the last payment, and why the last-installment adjustment fix is needed |
+| **شماره شبا (IBAN validation)** | The mod-97 checksum algorithm behind Iranian bank account number validation, computed with running modular arithmetic instead of one large division |
+| **شماره کارت (Luhn algorithm)** | The Luhn/Mod10 checksum behind every payment form's card-number validation |
+| **Banker's Rounding** | Why `Math.round` has a systematic upward bias on `.5` values, and how "round half to even" removes that bias across many transactions |
+| **ریال / تومان** | A very common Iranian-specific bug: storing amounts in Rial but displaying in Toman, and what a doubled unit conversion does to the displayed value |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Every tab shows a red (naive/incomplete) implementation next to a green (correct/complete) one, so the difference is something you can actually see, not just read about.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React (hooks only: `useState`, `useMemo`)
+- TypeScript
+- Tailwind CSS
+- No external libraries — every algorithm here is implemented from scratch
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Running locally
 
-```
+\`\`\`bash
+npm install
+npm run dev
+\`\`\`
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## What I'd improve next
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+- Add a real routing-number/SWIFT-style validation example for international transfers
+- Add a currency-conversion rounding example (splitting a foreign-currency amount across multiple accounts)
+- Pull IBAN/card test numbers from a small fixture file instead of hardcoding one example per section
