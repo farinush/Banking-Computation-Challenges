@@ -2,7 +2,8 @@
 
 An interactive React + TypeScript demo covering six real, common computational challenges that banking and fintech websites run into — each with a working, tabbed example showing both a naive (buggy) approach and the correct fix side by side.
 
-**[Live Demo](#)** · **[Screenshot](#)**
+**[Live Demo]:https://bankingcomputationchallenges.vercel.app/** 
+
 
 ## Why this project
 
